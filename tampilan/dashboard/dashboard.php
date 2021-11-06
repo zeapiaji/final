@@ -1,7 +1,9 @@
 <?php 
+	session_start();
 	include '../../db.php';
+	include '../../auth/adminSession.php';
 
-	$siswa = mysqli_query($koneksi, "SELECT * FROM register INNER JOIN kelas ON register.id_kelas = kelas.id_kelas INNER JOIN gender ON register.id_gender = gender.id_gender ");
+	$siswa = mysqli_query($koneksi, "SELECT * FROM register INNER JOIN kelas ON register.id_kelas = kelas.id_kelas INNER JOIN gender ON register.id_gender = gender.id_gender WHERE register.id_role = 2 ");
 
 	$penabung = mysqli_query($koneksi, "SELECT * FROM konfirmasi");
 
@@ -9,7 +11,7 @@
 
 	$total = mysqli_num_rows($siswa);
 
-	$saldo = mysqli_query($koneksi, "SELECT sum(saldo) as uang FROM saldo ");
+	$saldo = mysqli_query($koneksi, "SELECT sum(saldo) as uang FROM saldo INNER JOIN register ON saldo.id_user = register.id_user WHERE register.id_role = 2 ");
 
 	$row   = mysqli_fetch_assoc($saldo);
 

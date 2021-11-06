@@ -1,6 +1,10 @@
-<?php include '../../db.php';
+<?php 
+session_start();
+	include '../../db.php';
+	include '../../auth/adminSession.php';
 
-$dataSaldo = mysqli_query($koneksi, "SELECT * FROM saldo INNER JOIN register ON saldo.id_user = register.id_user");
+
+$dataSaldo = mysqli_query($koneksi, "SELECT * FROM saldo INNER JOIN register ON saldo.id_user = register.id_user WHERE register.id_role = 2");
 $no=1;
  ?>
  <body>

@@ -1,5 +1,7 @@
 <?php 
+    session_start();
 	include '../../db.php';
+	include '../../auth/adminSession.php';
 
 	$kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
  ?>
@@ -16,6 +18,7 @@
 				<tr>
 					<th>Kelas</th>
 					<th>Hapus</th>
+					<th>EDIT</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,6 +28,11 @@
 						<td>
 							<form action="../../route/web.php" method="post">
 								<button class="btn bg-dark text-danger border border-2 border-danger" name="hapuskelas" value="<?php echo $key["id_kelas"]; ?>" type="submit">Hapus</button>
+							</form>
+						</td>
+						<td>
+							<form action="editkelas.php" method="post">
+								<button class="btn bg-dark text-danger border border-2 border-danger" name="editkelas" value="<?php echo $key["id_kelas"]; ?>" type="submit">Edit</button>
 							</form>
 						</td>
 					</tr>

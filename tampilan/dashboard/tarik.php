@@ -1,5 +1,7 @@
 <?php 
+	session_start();
 	include '../../db.php';
+	include '../../auth/adminSession.php';
 
 	$id = $_POST['id'];
 

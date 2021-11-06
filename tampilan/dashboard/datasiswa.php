@@ -1,7 +1,9 @@
 <?php  
+	session_start();
 	include '../../db.php';
+	include '../../auth/adminSession.php';
 
-	$siswa = mysqli_query($koneksi, "SELECT * FROM register INNER JOIN kelas ON register.id_kelas = kelas.id_kelas INNER JOIN gender ON register.id_gender = gender.id_gender ");
+	$siswa = mysqli_query($koneksi, "SELECT * FROM register INNER JOIN kelas ON register.id_kelas = kelas.id_kelas INNER JOIN gender ON register.id_gender = gender.id_gender WHERE register.id_role = 2 ");
 
 	$no = 1;
 
@@ -37,7 +39,7 @@
 				      echo $tlp ?></td>
 				      <td>
 				      	<form action="../../route/web.php" method="post">
-				      		<button type="submit" value="<?php echo $key["id_user"]; ?>" name="hapussiswa" class="btn bg-dark border border-2 border-danger text-danger">Hapus</button>
+				      		<button type="submit" value="<?php echo $key["id_user"]; ?>" name="hapussiswa" class="btn bg-dark border border-2 border-danger text-danger" onclick="hapusMurid()">Hapus</button>
 				      	</form>
 				      </td>
 				    </tr>
@@ -46,5 +48,9 @@
 			</table>
 		</div>
 	</div>
-	
+	<script>
+		function hapusMurid(){
+			alert('Apakah Kamu Yakin Ingin Menghapus Siswa?');
+		}
+	</script>
 </body>
