@@ -18,6 +18,15 @@
  </head>
  <body>
  	<?php include '../navbar/nav.php' ?>
+    <?php if (isset($_SESSION['berhasil'])): ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif ?>
+    <?php if (isset($_SESSION['berhasil'])): ?>
+        <?php unset($_SESSION['berhasil']) ?>
+    <?php endif ?>
  	<div class="container mt-3 pt-3 pb-3 rounded">
  		<center>
  			<?php if ($row["gambar"] == null){ ?>

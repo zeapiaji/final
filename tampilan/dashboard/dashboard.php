@@ -16,6 +16,7 @@
 	$row   = mysqli_fetch_assoc($saldo);
 
 	$rupiah= number_format($row["uang"], 0, ",", ".");
+
  ?>
 <body style="background: linear-gradient(to right,#043927,#078d5f, #043927);">
 	<?php include '../navbar/nav.php'; ?>

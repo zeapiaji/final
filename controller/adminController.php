@@ -13,23 +13,30 @@
 
 		if ($saldo < 0) {
 			echo "<script>
-			alert('Target pasarnya bukan anda1');
+			alert('Target pasarnya bukan anda!');
 			document.location = '../tampilan/dashboard/tarik.php'
 			</script>";
+
+			exit;
 		}elseif ($saldo > $row["saldo"] ) {
 			echo "<script>
 			alert('Target pasarnya bukan anda');
 			document.location = '../tampilan/dashboard/tarik.php'
 			</script>";
+			exit;
 		}elseif($row["saldo"] >= $saldo ) {
-			$kurang = $row["saldo"] - $saldo;
-			$update = mysqli_query($db, "UPDATE saldo SET saldo='$kurang' WHERE id_user = $id");
-
-			if ($update) {
-				echo "<script>
-				alert('Penarikan Saldo Sukses');
-				document.location = '../tampilan/dashboard/datasaldo.php'
-				</script>";
+			$saldo2 = $row["saldo"];
+			$kurang = $saldo2 - $saldo;
+			$date   = date("Y-m-d");
+			$history = mysqli_query($db, "INSERT INTO riwayat(`riwayat`, `tanggal`, `id_user`, `saldo_asal`, `aksi`, `saldo_akhir`) VALUES ('Penarikan', '$date', '$id', '$saldo2', '$saldo', '$kurang') ");
+			if ($history) {
+				$update = mysqli_query($db, "UPDATE saldo SET saldo='$kurang' WHERE id_user = $id");
+				if ($update) {
+					echo "<script>
+					alert('Tabungan berhasil ditark');
+					document.location= '../tampilan/dashboard/dashboard.php'
+					</script>";
+				}
 			}else{
 				echo "<script>
 				alert('Lagi error keknya');
@@ -112,23 +119,27 @@
 		$dataKonfirmasi = mysqli_query($db, "SELECT * FROM konfirmasi WHERE id_konfirmasi = $id");
 
 		if(mysqli_num_rows($dataKonfirmasi) === 1){
-			$row = mysqli_fetch_assoc($dataKonfirmasi);
-			$saldo = $row["uang"];
+			$row 	= mysqli_fetch_assoc($dataKonfirmasi);
+			$saldo  = $row["uang"];
 			$iduser = $row["id_user"];
+			$date   = $row["date"];
 
 			$datasaldo = mysqli_query($db, "SELECT * FROM saldo WHERE id_user = $iduser");
 
 			if(mysqli_num_rows($datasaldo) === 1){
 
 				$row2   = mysqli_fetch_assoc($datasaldo);
-				$tambah = $saldo + $row2["saldo"];
+				$saldo2 = $row2["saldo"];
+				$tambah = $saldo + $saldo2;
 
-				$update = mysqli_query($db, "UPDATE saldo SET saldo='$tambah' WHERE
-				id_user = $iduser ");
+				$riwayat= mysqli_query($db, "INSERT INTO riwayat(`riwayat`, `tanggal`, `id_user`, `saldo_asal`, `aksi`, `saldo_akhir`) VALUES ('Pengisian', '$date', '$iduser', '$saldo2', '$saldo', '$tambah')");
 
-				if ($update) {
+				if ($riwayat) {
+					$update = mysqli_query($db, "UPDATE saldo SET saldo='$tambah' WHERE
+					id_user = $iduser ");
+
 					$hapus = mysqli_query($db, "DELETE FROM konfirmasi WHERE id_konfirmasi = $id");
-					if ($hapus) {
+					if ($update && $hapus) {
 						echo "<script>alert('Tabungan Berhasil Ditambah')
 						document.location = '../tampilan/dashboard/listpenabung.php'
 						</script>";
