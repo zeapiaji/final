@@ -67,4 +67,38 @@
 			</center>
 		</form>
 	</div>
+	<h3 class="text-center">History</h3>
+	<?php 
+	$riwayat = mysqli_query($koneksi, "SELECT * FROM riwayat WHERE id_user ='$auth' ORDER BY id_riwayat DESC");?>
+	<?php foreach ($riwayat as $history): ?>
+		<div class="container mt-4">
+			<div class="card text-center">
+				<div class="card-header <?php if($history['riwayat'] == 'Penarikan'){
+					echo 'bg-danger';
+				}else{
+					echo 'bg-success';
+				} ?>">
+				    <h3 class="text-white"><?php echo $history["riwayat"] ?></h3>
+				</div>
+				<div class="card-body">
+				    <div class="row d-flex justify-content-center mt-3">
+				   		<h5 class="col-2 text-start">Saldo asal</h5>
+				    	<h5 class="col-3 text-end">: Rp <?php echo number_format($history["saldo_asal"], 0,".","."); ?></h5>
+				    </div>
+				    <div class="row d-flex justify-content-center mt-3">
+				   		<h5 class="col-2 text-start">Besar <?php echo $history["riwayat"] ?>
+				   			<p class="mt-3 ">Hasil</p>
+				   		</h5>
+				    	<h5 class="col-3 text-end">: Rp <?php echo number_format($history["aksi"], 0,".","."); ?>
+				    		<p class="mt-3">: Rp <?php echo number_format($history["saldo_akhir"], 0, ".", "."); ?></p>
+				    	</h5>
+				    </div>
+				</div>
+				<div class="card-footer text-muted">
+				    <?php echo $history["tanggal"] ?>
+				</div>
+			</div>
+		</div>
+		
+	<?php endforeach ?>
 </body>

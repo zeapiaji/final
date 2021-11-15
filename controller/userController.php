@@ -14,7 +14,8 @@
 			document.location= '../tampilan/home/home.php'
 			</script>";
 		}else{
-			$kirim = mysqli_query($koneksi, "INSERT INTO konfirmasi(`id_user`, `pesan`, `uang`) VALUES ('$id', '$pesan', '$saldo')");
+			$date = date("Y-m-d");
+			$kirim = mysqli_query($koneksi, "INSERT INTO konfirmasi(`id_user`, `pesan`, `uang`, `date`) VALUES ('$id', '$pesan', '$saldo', '$date')");
 
 			header("Location: ../tampilan/home/home.php");
 		}
@@ -40,6 +41,8 @@
 					$query = mysqli_query($koneksi,"UPDATE register SET gambar='$nama' WHERE id_user=$id");
 
 					if($query){
+						session_start();
+						$_SESSION['berhasil'] = true;
 						header("Location: ../tampilan/home/profile.php");
 					}else{
 						echo "<script>
