@@ -10,9 +10,14 @@
 
 	$saldo  = mysqli_query($koneksi, "SELECT * FROM saldo WHERE id_user = $auth");
 
-	$uang   = mysqli_fetch_assoc($saldo);
+	if (mysqli_num_rows($saldo) === 1) {
+		$uang   = mysqli_fetch_assoc($saldo);
 
-	$format = number_format($uang["saldo"], 0, ",", ".");
+		$format = number_format($uang["saldo"], 0, ",", ".");
+	}else{
+		$format = 0;
+	}
+	
 
 	$date   = date('d-m-Y');
 	// echo $date;
@@ -33,13 +38,12 @@
 	      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
 	    </div>
 	    <div class="toast-body">
-	      Saldo berhasil ditambahkan,
 	      Permintaan sedang dalam antrian.
 	      <a href="#" id="detail-toast">detail</a>
 	    </div>
 	  </div>
 	</div>
-
+	
 
 <?php include '../navbar/nav.php'; ?>
 	<div class="bg-dark rounded mt-4 container text-light border border-2 pt-3 pb-3">	
@@ -52,12 +56,11 @@
 			<textarea class="form-control " name="pesan" required>
 			</textarea>
 			<center>
-				<button type="submit" class="mt-2 btn btn-outline-light" name="nabung" id="ya" value="
+				<button type="submit" class="mt-2 btn btn-outline-light" name="nabung" value="
 				<?php echo $auth; ?>">Kirim</button>
 				<!-- Toast Show -->
 					<?php if ('$auth'){ ?>
-						<script type="text/javascript">$('#ya').on('click',function(e){
-							e.preventDefault()
+						<script type="text/javascript">$('#ya').on('click',function(){
 							  $('#liveToast').toast('show');
 							  $('#main')[0].reset()
 							})

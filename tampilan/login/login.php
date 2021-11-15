@@ -5,13 +5,6 @@
 </head>
 <body style="background: linear-gradient(to right,#043927,#078d5f, #043927);">
   <?php include '../navbar/nav.php' ?>
-  <?php if(isset($_SESSION['us'])){ ?>
-        <div class="alert bg-danger text-white alert-dismissible fade show" role="alert">
-          <strong>Akun Tidak Ditemukan</strong> Mohon Periksa Kembali
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php session_destroy(); ?>
-  <?php } ?>
 	<div class="container" style="margin-left: 500px;">
 		<div class="login-content">
 			<form action="../../route/web.php" method="post">

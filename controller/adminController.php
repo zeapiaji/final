@@ -154,9 +154,10 @@
 						</script>";
 				}
 			}elseif(mysqli_num_rows($datasaldo) === 0) {
+				$riwayat= mysqli_query($db, "INSERT INTO riwayat(`riwayat`, `tanggal`, `id_user`, `saldo_asal`, `aksi`, `saldo_akhir`) VALUES ('Pengisian', '$date', '$iduser', '0', '$saldo', '$saldo')");
 				$hapus1   = mysqli_query($db, "DELETE FROM konfirmasi WHERE id_konfirmasi = $id");
 
-				if ($hapus1) {
+				if ($riwayat && $hapus1) {
 					$masukan = mysqli_query($db, "INSERT INTO saldo(`saldo`, `id_user`) VALUES ('$saldo', '$iduser')");
 
 					echo "<script>alert('Tabungan Berhasil Di tambahkan')

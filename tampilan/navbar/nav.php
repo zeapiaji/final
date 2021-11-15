@@ -14,9 +14,9 @@
               $nama = mysqli_fetch_assoc($data); ?>
 
             <?php if ($nama["gambar"] == null){ ?>
-              <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2 pp-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" >
+              <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" >
             <?php }else{ ?>
-              <img src="<?php echo "../../source/".$nama["gambar"]; ?>" class="mt-3 mb-2 border border-2 pp-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" style="height: 50px; width: 50px;" >
+              <img src="<?php echo "../../source/".$nama["gambar"]; ?>" class="mt-3 mb-2 border border-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" style="height: 50px; width: 50px; border-radius: 100%;" >
             <?php } ?>
             <ul class="dropdown-menu" id="menu-dropdown" aria-labelledby="dropdownMenuButton1">
 
@@ -25,11 +25,11 @@
               <center>
                 
                 <?php if ($nama["gambar"] == null){ ?>
-                <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2 pp-2">
+                <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2" style="border-radius: 100%;">
                 
                 <!-- Bila gambar ada -->
                 <?php }else{ ?> 
-                <img src="<?php echo "../../source/".$nama["gambar"]; ?>" class="mt-3 mb-2 border border-2 pp-2">
+                <img src="<?php echo "../../source/".$nama["gambar"]; ?>" class="mt-3 mb-2 border border-2"  style="height: 150px; width: 150px; border-radius: 100%;">
                 <?php } ?>
 
               </center>
