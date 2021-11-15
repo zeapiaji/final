@@ -10,11 +10,15 @@
            <?php if (isset($_SESSION["auth"])){ ?>
             <?php 
             $id   = $_SESSION['auth'];
-            $data = mysqli_query($koneksi, "SELECT * FROM register WHERE id_user = $id");
+            $data = mysqli_query($koneksi, "SELECT * FROM register INNER JOIN gender ON register.id_gender = gender.id_gender WHERE id_user = $id");
             $nama = mysqli_fetch_assoc($data); ?>
               <li class="nav-item dropdown navbar-nav" style="min-width:150px">
                   <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" style="font-size: 20px" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <?php echo $nama["nama"]; ?>
+                  <?php if ($nama["gambar"] == null){ ?>
+                    <img src="<?php echo $nama["avatar"]; ?>" style="max-width: 50px" class="rounded-circle">
+                  <?php }else{ ?>
+                    <img src="<?php echo "../../source/".$nama["gambar"]; ?>" style="max-width: 50px" class="rounded-circle">
+                  <?php } ?>
                   </a>
                   <ul class="dropdown-menu text-white" aria-labelledby="navbarDropdown">
                     <li ><a class="dropdown-item" href="../home/profile.php" calss="text-white">Profile</a></li>
