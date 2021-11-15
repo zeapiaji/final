@@ -1,44 +1,101 @@
 <?php include '../../public/head/head.php'; ?>
-<nav class="navbar navbar-expand-lg navbar-dark border-bottom border-2 border-light" style="background: linear-gradient(to right,#043927,#078d5f, #043927);">
-      <div class="container-fluid">
-        <h3 class="navbar-brand text-ligt">Tabungan Q</h3>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-           <?php if (isset($_SESSION["auth"])){ ?>
-            <?php 
-            $id   = $_SESSION['auth'];
-            $data = mysqli_query($koneksi, "SELECT * FROM register INNER JOIN gender ON register.id_gender = gender.id_gender WHERE id_user = $id");
-            $nama = mysqli_fetch_assoc($data); ?>
-              <li class="nav-item dropdown navbar-nav" style="min-width:150px">
-                  <a class="nav-link dropdown-toggle text-white" href="" id="navbarDropdown" style="font-size: 20px" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <?php if ($nama["gambar"] == null){ ?>
-                    <img src="<?php echo $nama["avatar"]; ?>" style="max-width: 50px" class="rounded-circle">
-                  <?php }else{ ?>
-                    <img src="<?php echo "../../source/".$nama["gambar"]; ?>" style="max-width: 50px" class="rounded-circle">
-                  <?php } ?>
-                  </a>
-                  <ul class="dropdown-menu text-white" aria-labelledby="navbarDropdown">
-                    <li ><a class="dropdown-item" href="../home/profile.php" calss="text-white">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <?php if ($nama["id_role"] == 2){ ?>
-                    <li><a href="../home/home.php" class="dropdown-item" calss="text-white">Home </a></li>
-                    <?php }elseif($nama["id_role"] == 1){ ?>
-                    <li><a href="../dashboard/dashboard.php" class="dropdown-item" calss="text-white">Dashboard</a></li>
-                    <?php } ?>  
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                      <a href="../../controller/logout.php" class="dropdown-item" calss="text-white">Logout</a>
-                    </li>
-                  </ul>
-                </li>
-           <?php }else{ ?>
-              <a href="../login/register.php" class="text-decoration-none text-white">Register</a>
-           <?php } ?>
-           </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow-sm" style="height: 65px;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="../home/home.php">TabunganQ</a>
+      <div class="d-flex">
+        <div class="collapse navbar-collapse">
+          <div class="dropstart ms-3">
+            
+            <!-- PP 1  -->
+            <?php if (isset($_SESSION["auth"])){ ?>
+              <?php 
+              $id   = $_SESSION['auth'];
+              $data = mysqli_query($koneksi, "SELECT * FROM register INNER JOIN gender ON register.id_gender = gender.id_gender WHERE id_user = $id");
+              $nama = mysqli_fetch_assoc($data); ?>
+
+            <?php if ($nama["gambar"] == null){ ?>
+              <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2 pp-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" >
+            <?php }else{ ?>
+              <img src="<?php echo "../../source/".$nama["gambar"]; ?>" class="mt-3 mb-2 border border-2 pp-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" style="height: 50px; width: 50px;" >
+            <?php } ?>
+            <ul class="dropdown-menu" id="menu-dropdown" aria-labelledby="dropdownMenuButton1">
+
+            <!-- PP Dalam -->
+              <!-- Bila gambar tidak ada, tampilkan gambar default (Shiro/Sora) -->
+              <center>
+                
+                <?php if ($nama["gambar"] == null){ ?>
+                <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2 pp-2">
+                
+                <!-- Bila gambar ada -->
+                <?php }else{ ?> 
+                <img src="<?php echo "../../source/".$nama["gambar"]; ?>" class="mt-3 mb-2 border border-2 pp-2">
+                <?php } ?>
+
+              </center>
+
+              <!-- Nama -->
+              <li><div class="dropdown-item" id="nama"> <?php echo $nama["nama"]; ?></div></li>
+
+              <!-- Kelas -->
+              <li><div class="dropdown-item" id="kelas">Kelas</div></li>
+              <hr style="width:100%;" id="line">
+
+              <!-- Profile -->
+              <li><a class="dropdown-item" id="profile" href="../home/profile.php">Profil</a></li>
+
+              <!-- Dark Mode -->
+              <li class="dropdown-item d-flex" id="dark-mode">Mode Gelap
+                <!-- Swith Dark Mode -->
+                <div class="form-check form-switch nav-item ms-5" style="color:white;">
+                  <input type="checkbox" role="switch" class="form-check-input" id="dark-theme">
+                </div>
+              </li>
+                
+              <!-- Home -->
+              <?php if ($nama["id_role"] == 2){ ?>
+              <li><a class="dropdown-item" id="beranda" href="../home/home.php">Beranda</a></li>
+              
+              <!-- Dashboard -->
+              <?php }elseif($nama["id_role"] == 1){ ?>
+              <li><a href="../dashboard/dashboard.php" class="dropdown-item" calss="text-white">Dasbor</a></li>
+              <?php } ?> 
+
+              <!-- Logout -->
+              <li><a class="dropdown-item" id="logout" href="../../controller/logout.php">Keluar</a></li>
+
+            </ul>
+
+            <!-- Bila navbar berada di login -->
+              <?php }else{ ?>
+                <a href="../login/register.php" class="text-decoration-none text-dark">Daftar</a>
+             <?php } ?>
+
+          </div>
         </div>
       </div>
-    </nav>
+    </div>
+</nav>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#dark-theme').change(function(){
+      // Navbar
+      $('nav').toggleClass('navbar-dark bg-dark')
+        // Dropdown Profile
+        $('ul').toggleClass('bg-dark')
+          $('#nama').toggleClass('text-light')
+          $('#kelas').toggleClass('text-light')
+          $('#dark-mode').toggleClass('text-light')
+          $('hr').toggleClass('text-light')
+          $('#profile').toggleClass('text-white')
+          $('#beranda').toggleClass('text-white')
+          $('#logout').toggleClass('text-white')
+      // Body Img
+      $('body').toggleClass('bg-img-dark')
+    })
+  })
+</script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
