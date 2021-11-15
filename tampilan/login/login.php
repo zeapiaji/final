@@ -32,14 +32,17 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" name="password" class="input" required>
+           		    	<input type="password" name="password" class="input form-password" required>
             	   </div>
+                 <input type="checkbox" class="form-checkbox"> Show password
             	</div>
             	<a href="verifpw.php" style="text-decoration: none; color: white; ">Forgot Password?</a>
             	<button type="submit" class="btn btn-outline-light" name="login">login</button>
             </form>
         </div>
     </div>
+    <script src="../../public/js/jquery-3.6.0.min.js"></script>
+    <script src="../../public/js/showpassword.js"></script>
     <script src="../../public/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
