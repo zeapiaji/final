@@ -2,9 +2,15 @@
 session_start();
 	include '../../db.php';
 	include '../../auth/adminSession.php';
+	$id = $_SESSION["auth"];
+
+	$parameter = mysqli_query($koneksi, "SELECT * FROM register WHERE id_user='$id' ");
+	$row       = mysqli_fetch_assoc($parameter);
+
+	$kelas = $row["id_kelas"];
 
 
-$dataSaldo = mysqli_query($koneksi, "SELECT * FROM saldo INNER JOIN register ON saldo.id_user = register.id_user WHERE register.id_role = 2");
+$dataSaldo = mysqli_query($koneksi, "SELECT * FROM saldo INNER JOIN register ON saldo.id_user = register.id_user WHERE register.id_role = 2 AND register.id_kelas = '$kelas' ORDER BY saldo DESC");
 $no=1;
  ?>
  <body>
@@ -35,6 +41,14 @@ $no=1;
 				      </td>
 				    </tr>
 			  	<?php endforeach ?>
+			  	<tr>
+					<td colspan="2" style="font-weight: bold;">Total :</td>
+					<td colspan="2" >Rp <?php $saldo = mysqli_query($koneksi, "SELECT sum(saldo) as uang FROM saldo INNER JOIN register ON saldo.id_user = register.id_user WHERE register.id_role = 2 AND register.id_kelas= '$kelas' ");
+					$row = mysqli_fetch_assoc($saldo);
+
+					echo number_format($row["uang"], 0, ".", ".");
+					 ?></td>
+				</tr>
 			  </tbody>
 			</table>
  </body>

@@ -39,6 +39,7 @@
 		  	}elseif ($row["id_role"] == 3 ) {
 		  		if ($passwordVer) {
 		  			$_SESSION["auth"] = $row["id_user"];
+		  			header("Location: ../tampilan/dashboard/dashboard.php");
 		  		}else{
 		  			echo "<script>
 			  		alert('Saha Sia?!!!');
@@ -104,6 +105,8 @@
 		
 		$datatlp  = mysqli_query($koneksi, "SELECT no_tlp FROM register WHERE no_tlp = '$tlp'");
 
+		$datanis  = mysqli_query($koneksi, "SELECT nis FROM register WHERE nis = '$nis' ");
+
 		if (mysqli_fetch_assoc($datauser)) {
 			echo "<script>alert('Username telah digunakan');
 			document.location= '../tampilan/login/register.php'
@@ -112,6 +115,12 @@
 			exit;
 		}elseif (mysqli_fetch_assoc($datatlp)) {
 			echo "<script>alert('No tlp telah digunakan');
+			document.location= '../tampilan/login/register.php'
+			</script>";
+
+			exit;
+		}elseif (mysqli_fetch_assoc($datanis)) {
+			echo "<script>alert('NIS telah digunakan');
 			document.location= '../tampilan/login/register.php'
 			</script>";
 

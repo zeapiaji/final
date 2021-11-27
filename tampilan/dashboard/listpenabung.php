@@ -3,7 +3,16 @@
 	include '../../db.php';
 	include '../../auth/adminSession.php';
 
-	$list = mysqli_query($koneksi, "SELECT * FROM konfirmasi INNER JOIN register ON konfirmasi.id_user = register.id_user INNER JOIN kelas ON register.id_kelas = kelas.id_kelas WHERE register.id_role= 2");
+	$id = $_SESSION["auth"];
+
+	$query = mysqli_query($koneksi, "SELECT	* FROM	register WHERE	id_user='$id'");
+
+	$row = mysqli_fetch_assoc($query);
+
+	$kelas = $row["id_kelas"];
+
+
+	$list = mysqli_query($koneksi, "SELECT * FROM konfirmasi INNER JOIN register ON konfirmasi.id_user = register.id_user INNER JOIN kelas ON register.id_kelas = kelas.id_kelas WHERE register.id_role= 2 AND register.id_kelas = '$kelas' ORDER BY id_konfirmasi DESC");
 
 	$coba = mysqli_query($koneksi, "SELECT * FROM kelas ");
 

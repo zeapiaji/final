@@ -14,7 +14,7 @@
               $nama = mysqli_fetch_assoc($data); ?>
 
             <?php if ($nama["gambar"] == null){ ?>
-              <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" >
+              <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" style="height: 50px; width: 50px; border-radius: 100%;" >
             <?php }else{ ?>
               <img src="<?php echo "../../source/".$nama["gambar"]; ?>" class="mt-3 mb-2 border border-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown" style="height: 50px; width: 50px; border-radius: 100%;" >
             <?php } ?>
@@ -25,7 +25,7 @@
               <center>
                 
                 <?php if ($nama["gambar"] == null){ ?>
-                <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2" style="border-radius: 100%;">
+                <img src="<?php echo $nama ["avatar"] ?>" class="mt-3 mb-2 border border-2" style="height: 150px; width: 150px; border-radius: 100%;">
                 
                 <!-- Bila gambar ada -->
                 <?php }else{ ?> 
@@ -57,8 +57,8 @@
               <li><a class="dropdown-item" id="beranda" href="../home/home.php">Beranda</a></li>
               
               <!-- Dashboard -->
-              <?php }elseif($nama["id_role"] == 1){ ?>
-              <li><a href="../dashboard/dashboard.php" class="dropdown-item" calss="text-white">Dasbor</a></li>
+              <?php }elseif($nama["id_role"] == 1 || 3){ ?>
+              <li><a href="../dashboard/dashboard.php" class="dropdown-item" calss="text-white">Dashboard</a></li>
               <?php } ?> 
 
               <!-- Logout -->
@@ -91,6 +91,7 @@
           $('#profile').toggleClass('text-white')
           $('#beranda').toggleClass('text-white')
           $('#logout').toggleClass('text-white')
+          $('#body2').toggleClass('bg-dark')
       // Body Img
       $('body').toggleClass('bg-img-dark')
     })

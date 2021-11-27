@@ -95,7 +95,7 @@
 
 		$id 	= $data["hapussiswa"];
 
-		$destroy= mysqli_query($db, "DELETE FROM register WHERE id_user = $id");
+		$destroy= mysqli_query($db, "UPDATE register SET id_role=0 WHERE id_user = $id");
 
 		if($destroy){
 			echo "<script>
@@ -157,7 +157,7 @@
 				$riwayat= mysqli_query($db, "INSERT INTO riwayat(`riwayat`, `tanggal`, `id_user`, `saldo_asal`, `aksi`, `saldo_akhir`) VALUES ('Pengisian', '$date', '$iduser', '0', '$saldo', '$saldo')");
 				$hapus1   = mysqli_query($db, "DELETE FROM konfirmasi WHERE id_konfirmasi = $id");
 
-				if ($riwayat && $hapus1) {
+				if ($riwayat & $hapus1) {
 					$masukan = mysqli_query($db, "INSERT INTO saldo(`saldo`, `id_user`) VALUES ('$saldo', '$iduser')");
 
 					echo "<script>alert('Tabungan Berhasil Di tambahkan')
@@ -191,7 +191,7 @@
 		if (mysqli_num_rows($datakelas) === 1) {
 			$row = mysqli_fetch_assoc($datakelas);
 			if($row){
-				$update = mysqli_query($db, "UPDATE kelas SET kelas='$kelas' WHERE id_kelas = $id ");
+				$update = mysqli_query($db, "UPDATE kelas SET kelas='$kelas' WHERE id_kelas ='$id' ");
 
 				if ($update) {
 					echo "<script>
