@@ -61,7 +61,7 @@
      <div class="container">
      	<div class="row mb-4">
      		<div class="col-5 btn btn-outline-primary">
-          <a href="../home/pemasukan.php" style="text-decoration: none;">
+          <a href="#" style="text-decoration: none;">
      			    <p class="row pengeluaran-pemasukan"><b>Pemasukan</b></p>
      			    <p class="row pengeluaran-pemasukan-saldo"><b>Rp <?php echo number_format($total["total"], 0, ".", "."); ?></b></p>
           </a>
@@ -70,7 +70,7 @@
           
         </div>
         <div class="col-5 btn btn-outline-primary">
-          <a href="../home/pengeluaran.php" style="text-decoration: none;">
+          <a href="#" style="text-decoration: none;">
               <p class="pengeluaran-pemasukan"><b>Pengeluaran</b></p>
               <p class="pengeluaran-pemasukan-saldo"><b>Rp <?php echo number_format($row["jumlah"], 0, ".", "."); ?></b></p>
           </a>

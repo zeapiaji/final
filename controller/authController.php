@@ -22,7 +22,7 @@
 		  			exit;
 		  		}else{
 		  			echo "<script>
-			  		alert('Saha Sia?!!!');
+			  		alert('Username atau Password salah');
 			  		document.location= '../tampilan/login/login.php'
 			  		</script>";
 		  		}
@@ -32,7 +32,7 @@
 		  			header("Location: ../tampilan/home/home.php");
 		  		}else{
 		  			echo "<script>
-			  		alert('Saha Sia?!!!');
+			  		alert('Username autau Password salah');
 			  		document.location= '../tampilan/login/login.php'
 			  		</script>";
 		  		}
@@ -42,13 +42,13 @@
 		  			header("Location: ../tampilan/dashboard/dashboard.php");
 		  		}else{
 		  			echo "<script>
-			  		alert('Saha Sia?!!!');
+			  		alert('Username autau Password salah');
 			  		document.location= '../tampilan/login/login.php'
 			  		</script>";
 		  		}
 		  	}else {
 		  		echo "<script>
-		  		alert('Saha Sia?!!!');
+		  		alert('Username autau Password salah');
 		  		document.location= '../tampilan/login/login.php'
 		  		</script>";
 		  	}
@@ -145,6 +145,7 @@
 		if (mysqli_num_rows($dataUser) === 1) {
 			$row  = mysqli_fetch_assoc($dataUser);
 			if ($row["no_tlp"] == $tlp) {
+
 				$_SESSION['ver'] = $row["id_user"];
 			    header("Location: ../tampilan/login/ubahpw.php");
 			}else{
@@ -182,10 +183,18 @@
 		$ubahPw = mysqli_query($koneksi, "UPDATE register SET password='$hash' WHERE id_user = $id");
 
 		if ($ubahPw) {
-			echo "<script>
+			session_start();
+			if(isset($_SESSION["auth"])){
+				echo "<script>
+			alert('Password berhasil diubah');
+			document.location= '../tampilan/home/home.php'
+			</script>";	
+			}else{
+				echo "<script>
 			alert('Password berhasil diubah');
 			document.location= '../tampilan/login/login.php'
 			</script>";
+			}
 		}else{
 			echo "<script>
 			alert('lagi error keknya');

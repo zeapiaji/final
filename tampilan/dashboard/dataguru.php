@@ -9,9 +9,10 @@
 	$no = 1;
 
  ?>
-<body class="bg-dark">
+<body class="body-cs">
 	<?php include '../navbar/nav.php'; ?>
-	<div class="container pt-3 pb-2 mt-3 rounded border border-2 border-light" style="background: linear-gradient(to right,#043927,#078d5f, #043927);">
+	<div class="container pt-3 mt-3">
+		<div class="container pt-3 mt-3">
 		<?php if(isset($_SESSION["success"])): ?>
 			<div class="alert alert-warning alert-dismissible fade show" role="alert">
 	          <strong>Penambahan Guru Berhasil</strong>
@@ -21,14 +22,35 @@
 		<?php if (isset($_SESSION["success"])): ?>
 			<?php unset($_SESSION['success']) ?>
 		<?php endif ?>
-		<div class="d-flex justify-content-center">
-			<input type="" id="cari" onkeyup="cariSiswa()" name="" class="form-control mt-3" style="max-width: 430px" placeholder="Cari Guru ..">
-		</div>
-		<div class="row container mt-3">
-			<a href="dashboard.php" class="text-decoration-none text-white">Dashboard</a>
-			<a href="tambahguru.php" class="text-end text-decoration-none text-white">Tambah Guru</a>
+		
+		<div class="row">
+			<div class="col-4">
+					<a href="dashboard.php" class="text-decoration-none text-muted up fw-bold utkbtn h5">
+						<img src="../../source/svg/caret-square-left-solid.svg" style="width: 20px;"> Kembali
+					</a>
+				</div>
+			<div class="col-4">
+				<center class="txt">
+					<h1>List Guru</h1>
+				</center>
+			</div>
+			<div class="col-4">
+				<a href="tambahguru.php" class="text-end text-decoration-none text-dark">Tambah Guru</a>
+			</div>
+		</div>	
 
-			<table class="table text-light">
+		<!-- Search -->
+		<div class="form-floating mb-3">
+			   	<input type="search" class="boxSearch form-control rounded border border-2" onkeyup="cariSiswa()" id="cari" placeholder="name@example.com" style="max-width: 200px;">
+			   	<label for="floatingInput" class="form-label fw-bold" >Cari Guru</label>
+			</div>
+				<!-- Search Default Kukuh -->
+				<!-- <div class="d-flex justify-content-center">
+			<input type="" id="cari" onkeyup="cariSiswa()" name="" class="form-control mt-3" style="max-width: 430px" placeholder="Cari Guru ..">
+				</div> -->
+
+<!-- /Header -->
+			<table class="table fw-bold mt-5">
 			  <thead>
 			    <tr>
 			      <th scope="col">No</th>
@@ -61,7 +83,7 @@
 				                echo $result ?></td>
 				      <td>
 				      	<form action="../../route/web.php" method="post">
-				      		<button type="submit" value="<?php echo $key["id_user"]; ?>" name="hapusguru" class="btn bg-dark border border-2 border-danger text-danger" onclick="hapusMurid()">Hapus</button>
+				      		<button type="submit" value="<?php echo $key["id_user"]; ?>" name="hapusGuru" class="btn btn-outline-dark" onclick="hapusMurid()">Hapus</button>
 				      	</form>
 				      </td>
 				    </tr>
@@ -70,6 +92,26 @@
 			</table>
 		</div>
 	</div>
-	<script src="../../public/js/search.js"></script>
+	<script>
+		function hapusMurid(){
+            alert('Apakah Kamu Yakin Ingin Menghapus?');
+        }
+        
+		function cariSiswa(){
+		            var input = document.getElementById("cari");
+		            var filter = input.value.toLowerCase();
+		            var ul = document.getElementById("daftarSiswa");
+		            var li = document.querySelectorAll("tr")
+		            console.log(li)
+		            for(var i = 0; i<li.length; i++){
+		                var ahref = document.querySelectorAll("tr")[i];
+		                if(ahref.innerHTML.toLowerCase().indexOf(filter) > -1){
+		                    li[i].style.display = "";
+		                }else{
+		                    li[i].style.display = "none";
+		                }
+		            }
+		}
+	</script>
 
 </body>

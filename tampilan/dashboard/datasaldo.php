@@ -15,7 +15,31 @@ $no=1;
  ?>
  <body>
  	<?php include '../navbar/nav.php'; ?>
- 			<table class="table container mt-3 table-dark table-striped ">
+<div class="container pt-3 mt-3">
+	<div class="container pt-3 mt-3">
+	 	<div class="row">
+			<div class="col-4">
+					<a href="dashboard.php" class="text-decoration-none text-muted up fw-bold utkbtn h5">
+						<img src="../../source/svg/caret-square-left-solid.svg" style="width: 20px;"> Kembali
+					</a>
+				</div>
+			<div class="col-4">
+				<center class="txt">
+					<h1>Data Saldo</h1>
+				</center>
+			</div>
+			<div class="col-4 text-end text-decoration-none text-white">
+				
+				</div>
+			</div>
+
+			<div class="form-floating mb-3">
+			   		<input type="search" class="boxSearch form-control rounded border border-2" id="cari"placeholder="name@example.com" style="max-width: 200px;" onkeyup="cariSiswa()">
+			   		<label for="floatingInput" class="form-label fw-bold">Cari siswa</label>
+			   	</div>
+
+
+ 			<table class="table fw-bold mt-5">
 			  <thead>
 			    <tr>
 			      <th scope="col">No</th>
@@ -33,11 +57,9 @@ $no=1;
 				      $format = number_format($uang, 0, ",", ".");
 				      echo $format; ?></td>
 				      <td>
-				      	<center>
 				      		<form action="tarik.php" method="post">
-				      			<button class="btn btn-outline-light" value="<?php echo $key["id_user"]; ?>" name="id">Tarik</button>
+				      			<button class="btn btn-outline-dark" value="<?php echo $key["id_user"]; ?>" name="id">Tarik</button>
 				      		</form>
-				      	</center>
 				      </td>
 				    </tr>
 			  	<?php endforeach ?>
@@ -51,4 +73,27 @@ $no=1;
 				</tr>
 			  </tbody>
 			</table>
+	</div>
+</div>
+<script>
+		function hapusMurid(){
+            alert('Apakah Kamu Yakin Ingin Menghapus?');
+        }
+        
+		function cariSiswa(){
+		            var input = document.getElementById("cari");
+		            var filter = input.value.toLowerCase();
+		            var ul = document.getElementById("daftarSiswa");
+		            var li = document.querySelectorAll("tr")
+		            console.log(li)
+		            for(var i = 0; i<li.length; i++){
+		                var ahref = document.querySelectorAll("tr")[i];
+		                if(ahref.innerHTML.toLowerCase().indexOf(filter) > -1){
+		                    li[i].style.display = "";
+		                }else{
+		                    li[i].style.display = "none";
+		                }
+		            }
+		}
+	</script>
  </body>

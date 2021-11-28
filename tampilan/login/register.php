@@ -4,8 +4,7 @@
 	<meta charset="utf-8">
 	<title>regist</title>
 	<?php include '../../public/head/head.php' ?>
-	<link rel="stylesheet" type="text/css" href="../../public/Bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../../public/css/register.css">
+	
 </head>
 
 <?php 
@@ -14,51 +13,47 @@
 	$kelas = mysqli_query($koneksi, "SELECT * FROM kelas");
 	$gender= mysqli_query($koneksi, "SELECT * FROM gender");
  ?>
-
-<nav class="navbar navbar-light navbar-expand-lg">
-  <div class="container-fluid">
-    <a class="navbar-brand text-white fw-bolder t">Tabungan | Q</a>
-  </div>
-  <div class="mt-2 fn-login">
-			<a href="" class="text-white">login</a>
+<body class="dy">
+	<div class="cont">
+		<form action="../../route/web.php" method="POST" class="login-email">
+      		<p class="login-text" style="font-size: 2rem; font-weight: 800;">Daftar</p>
+				<div class="input-group">
+					<input type="email" name="username" placeholder="Username" required>
+				</div>
+				<div class="input-group">
+					<input type="password" name="password" class="form-password" placeholder="Sandi" required>
+				</div>
+				<div class="input-group">
+					<input type="password" name="password2" class="form-password" placeholder="Konfirmasi Sandi" required>
+	      		</div>
+      		<div class="form-check form-switch mb-4" style="margin-left: 5px;">
+			  <input class="form-check-input form-checkbox" type="checkbox" role="switch" onclick="myFunction()">
+			  <label class="form-check-label" id="sandi">Perlihatkan Sandi</label>
+			</div>
+	      	<div class="input-group">
+				<input type="text" name="nama" placeholder="Nama" required>
+			</div>
+			<div class="input-group">
+				<input type="number" name="tlp" placeholder="No Telepon" >
+			</div>
+			<div class="input-group">
+				<input type="number" name="nis" placeholder="NIS" >
+			</div>
+			<select name="kelas" class="form-select mb-4">
+					<?php foreach($kelas as $key): ?>
+				<option value="<?php echo $key["id_kelas"] ?>"><?php echo $key["kelas"] ?></option>
+					<?php endforeach ?>
+			</select>
+			<select name="gender" class="form-select">
+					<?php foreach($gender as $gen): ?>
+				<option value="<?php echo $gen["id_gender"] ?>"><?php echo $gen["gender"] ?></option>
+					<?php endforeach ?>
+			</select><br>
+			<div class="input-group">
+				<button name="register" class="btn">Daftar</button>
+			</div>
+			<p class="login-register-text">Sudah punya akun? <a href="login.php"> Masuk disini</a>.</p>
+		</form>
 	</div>
-</nav>
-<body class="bg-primary"> 
-	<h2 class="fw-bold text-white" style="margin-left: 20px;">REGISTRASI!</h2>
-   <div class="login-box">
-<form action="../../route/web.php" method="post">
-	Username<input type="email" name="username"><br><br>
-	Password<input type="password" name="password"><br><br>
-	Konfirmasi password<input type="password" name="password2"><br><br>
-	Nama<input type="text" name="nama"><br><br>
-	No_tlp +62<input type="number" name="tlp"><br><br>
-	NIS<input type="number" name="nis"><br><br>
-	<select name="kelas">
-		<?php foreach($kelas as $key): ?>
-			<option value="<?php echo $key["id_kelas"] ?>"><?php echo $key["kelas"] ?></option>
-		<?php endforeach ?>
-	</select>
-	<select name="gender">
-		<?php foreach($gender as $gen): ?>
-			<option value="<?php echo $gen["id_gender"] ?>"><?php echo $gen["gender"] ?></option>
-		<?php endforeach ?>
-	</select>
-	<button type="submit" name="register">Register</button>
-</form>
-   </div>
 </body>
-<div style="margin-top: 700px;">
-<div class="container absolute">
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">About</a></li>
-    </ul>
-    <p class="text-center text-white">© 2021 Company, Inc</p>
-  </footer>
-</div>
-</div>
 </html>

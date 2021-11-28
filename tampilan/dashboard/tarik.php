@@ -14,13 +14,25 @@
 	$saldo 	   = mysqli_fetch_assoc($dataSaldo);
  ?>
 
-<h3>Saldo <?php echo $row["nama"]; ?> Sekarang</h3>
-<h3>Rp.
-	<?php $uang = number_format($saldo["saldo"], 0, ",", ".");
-	echo $uang; ?>		
-</h3>
-<form action="../../route/web.php" method="post">
-	<h4>Masukan Jumlah Saldo yang ingin di tarik :</h4>
-	<input type="number" name="saldo">
-	<button class="btn" value="<?php echo $id; ?>" name="tariksaldo">Konfirmasi</button>
-</form>
+
+
+<?php include '../../public/head/head.php'; ?>
+
+<body class="dy">
+  <div class="cont">
+    <form action="../../route/web.php" method="POST" class="login-email">
+      <p class="login-text" style="font-size: 2rem; font-weight: 800;">Saldo <?php echo $row['nama']; ?></p>
+    	<p class="login-text" style="font-size: 2rem; font-weight: 800;">Rp.
+		<?php $uang = number_format($saldo["saldo"], 0, ",", ".");
+		echo $uang; ?>
+		</p>
+
+      <div class="input-group">
+        <input class="form-password" type="number" placeholder="Tarik Saldo" name="saldo" required>
+      </div>
+      <div class="input-group mt-5">
+        <button name="tariksaldo" class="btn" value="<?php echo $id; ?>">Konfirmasi</button>
+      </div>
+    </form>
+  </div>
+</body>

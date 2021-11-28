@@ -39,70 +39,112 @@
  ?>
 <body style="background-image: url('https://initiate.alphacoders.com/images/740/cropped-1600-1200-740377.png?4699');">
 	<?php include '../navbar/nav.php'; ?>
-	<div class="container border border-2 mt-4 pt-2 pb-3 rounded position-absolute top-50 start-50 translate-middle">
-			<div class="row mt-3" style="font-family: Comic Sans Ms; color: #AA14F0;">
-				<div class="col-4">
-					<div class="container border border-2 border-light mt-4 pt-2 pb-3 rounded" style="width:18rem;" >
-					  <div class="card-body" >
-					    <h3 class="card-title text-center " style="font-weight: bold;">
-					    	<?php 
-					    	if ($row["id_role"] == 3) {
-					    		echo "Total Murid";
-					    	}else{
-					    		echo "Total Murid ". $siswa["kelas"];
-					    	}
-					     ?></h3>
-					    <h3 class="card-text text-center"><?php echo $total ?></h3>
-					    <center>
-					    <a href="datasiswa.php" class="btn btn-outline-light">Lihat</a>
-					    </center>
-					  </div>
-					</div>
-				</div>
-				<div class="col-4">
-					<div class="container border border-2 border-light mt-4 pt-2 pb-3 rounded" style="width:18rem; font-weight: bold;" >
-					  <div class="card-body" >
-					    <h3 class="card-title text-center"><?php 
-					    if ($row["id_role"] == 1) {
-					     	echo "Saldo";
-					     }else{
-					     	echo "Total Guru";
-					     } ?></h3>
-					    <h3 class="card-text text-center"><?php if($row["id_role"] == 3){
-					    	$totalguru = mysqli_query($koneksi, "SELECT * FROM register WHERE id_role= 1");
-					    	echo mysqli_num_rows($totalguru);
-					    }else{
-					    	echo "Rp ". $rupiah;
-					    } ?></h3>
-					    <center>
-					    	<?php if ($row["id_role"] == 1){ ?>
-					    		<a href="datasaldo.php" class="btn btn-outline-light">Lihat</a>
+	<div class="container-fluid">
+
+			<div class="row">
+
+				<div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                      <div class="card">
+                        <div class="card-header p-3 pt-2">
+                          <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                            <img src="../../source/svg/user-graduate-solid.svg" style="width: 55px;">
+                          </div>
+                          <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">
+                            	<?php 
+							    	if ($row["id_role"] == 3) {
+							    		echo "Total Murid";
+							    	}else{
+							    		echo "Total Murid ". $siswa["kelas"];
+							    	}
+					     		?>
+					     	</p>
+                            <h4 class="mb-0"><?php echo $total ?></h4>
+                          </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                          <div class="card-footer p-3 btn btn-light" onclick="window.location.href = 'datasiswa.php';">
+                            <span class="text-success text-sm font-weight-bolder"></span>Selengkapnya
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                      <div class="card">
+                        <div class="card-header p-3 pt-2">
+                          <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                            <img src="../../source/svg/users-solid.svg" style="width: 85px; ">
+                          </div>
+                          <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize" style="margin-top: 2px;">
+								<?php 
+								    if ($row["id_role"] == 1) {
+								     	echo "Saldo";
+								     }else{
+								     	echo "Total Guru";
+								     } ?>
+							</p>
+							<p class="text-sm mb-0 text-capitalize">
+								<?php if($row["id_role"] == 3){
+							  		$totalguru = mysqli_query($koneksi, "SELECT * FROM register WHERE id_role= 1");
+							   		echo mysqli_num_rows($totalguru);
+							   	?>	
+                            </p>
+                            <h4 class="text-sm mb-1 text-capitalize">
+                            	<?php  }else{
+								    		echo "Rp". $rupiah;
+								    	} ?>
+                            </h4>
+                          </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                          <div class="card-footer p-3 btn btn-light">
+                              <span class="text-success text-sm font-weight-bolder"></span>
+                            <?php if ($row["id_role"] == 1){ ?>
+					    		<div onclick="window.location.href = 'datasaldo.php';">Selengkapnya</div>
 					    	<?php }else{ ?>
-					    		<a href="dataguru.php" class="btn btn-outline-light">Lihat</a>
+					    		<div onclick="window.location.href = 'dataguru.php';">Selengkapnya</div>
 					    	<?php } ?>
-					    </center>
-					  </div>
-					</div>
-				</div>
-				<div class="col-4">
-					<div class="container border border-2 border-light mt-4 pt-2 pb-3 rounded" style="width:18rem;" >
-					  <div class="card-body" >
-					    <h5 class="card-title text-center" style="font-weight: bold;"><?php if ($row["id_role"] == 1) {
-					    	echo "Penabung Hari ini";
-					    }else{
-					    	echo "Siswa yang telah di hapus";
-					    } ?></h5>
-					    <h3 class="card-text text-center"><?php echo $ttl_penabung; ?></h3>
-					    <center>
-					    	<?php if ($row["id_role"] == 1){ ?>
-					    		<a href="listpenabung.php" class="btn btn-outline-light">Lihat</a>
-					    	<?php }else{ ?>
-					    		<a href="deleteduser.php" class="btn btn-outline-light">Lihat</a>
-					    	<?php } ?>
-					    </center>
-					  </div>
-					</div>
-				</div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                      <div class="card">
+                        <div class="card-header p-3 pt-2">
+                          <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                          	<?php if ($row["id_role"] == 3){ ?>
+                          		<img src="../../source/svg/user-times-solid.svg" style="width: 72px;">
+                          	<?php }else{ ?>
+                            	<img src="../../source/svg/piggy-bank-solid.svg" style="width: 72px;">
+                          	<?php } ?>
+                          </div>
+                          <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">
+								<?php if ($row["id_role"] == 1) {
+							    	echo "Penabung Hari ini";
+							    }else{
+							    	echo "Siswa yang telah di hapus";
+							    } ?>                            	
+                            </p>
+                            <h4 class="mb-0"><?php echo $ttl_penabung; ?></h4>
+                          </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                          <div class="card-footer p-3 btn btn-light">
+                              <span class="text-success text-sm font-weight-bolder"></span>
+						                <?php if ($row["id_role"] == 1){ ?>
+											    		<div onclick="window.location.href = 'listpenabung.php';">Selengkapnya</div>
+											    	<?php }else{ ?>
+											    		<div onclick="window.location.href = 'deleteduser.php';">Selengkapnya</div>
+											    	<?php } ?>
+                          </div>
+                        </div>
+                      </div>
+
 			</div>
 	</div>
 </body>
+
+
+

@@ -53,6 +53,10 @@ if (isset($_POST["editpw"])) {
 	editPw($_POST);
 }
 
+if (isset($_POST["gantipassword"])) {
+	gantiPassword($_POST);
+}
+
 // Buat super admin sama Admin Ada di controller super
 
 if (isset($_POST['lihatRiwayat'])) {
@@ -80,8 +84,9 @@ if (isset($_POST["hapusSiswa"])) {
 if (isset($_POST["kembalikanSiswa"])) {
 	kembalikanSiswa($_POST);
 }
-if (isset($_POST["hapusguru"])) {
-	hapusGuru($_POST);
-}
- ?>
 
+if (isset($_POST["hapusGuru"])) {
+	hapusGuruu($_POST);
+}
+
+ ?>

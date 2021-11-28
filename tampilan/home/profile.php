@@ -37,7 +37,8 @@
                         <img src="<?php echo "../../source/".$row["gambar"]; ?>" class="rounded-circle" style="width: 200px; height:200px ;">
                     <?php } ?>
                     
-                    <a href="updateprofile.php" class="btn btn-outline-danger mt-4  ">Update Profile</a>
+                    <a href="updateprofile.php" class="btn btn-outline-danger mt-4  ">Update Profile</a><br>
+                    <a href="../login/ubahpw.php" class="btn btn-outline-danger mt-2  ">Ubah PW</a>
                 </center>
             </div>
             <div class="col-8 pt-5 pb-5 text-danger " style="margin-left: 50px">
@@ -72,6 +73,7 @@
                                 substr($row["no_tlp"], 8)); 
                                 echo $result ?></h3>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -83,7 +83,7 @@
       // Navbar
       $('nav').toggleClass('navbar-dark bg-dark')
         // Dropdown Profile
-        $('ul').toggleClass('bg-dark')
+        $('#menu-dropdown').toggleClass('bg-dark')
           $('#nama').toggleClass('text-light')
           $('#kelas').toggleClass('text-light')
           $('#dark-mode').toggleClass('text-light')

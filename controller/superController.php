@@ -18,6 +18,8 @@
 
 		$hash     = password_hash($password, PASSWORD_DEFAULT);
 
+		$datakelas = mysqli_query($koneksi, "SELECT * FROM register	WHERE id_role=1 AND id_kelas='$idkelas'");
+			
 		if($password !== $password2){
 			echo "<script>
 			alert('Password Tidak Cocok');
@@ -53,6 +55,12 @@
 			exit;
 		}elseif (mysqli_fetch_assoc($datatlp)) {
 			echo "<script>alert('No tlp telah digunakan');
+			document.location= '../tampilan/dashboard/tambahguru.php'
+			</script>";
+
+			exit;
+		}elseif(mysqli_fetch_assoc($datakelas)){
+			echo "<script>alert('Walikelas dari kelas ini sudah terdaftar');
 			document.location= '../tampilan/dashboard/tambahguru.php'
 			</script>";
 
@@ -139,24 +147,21 @@
 		}
 	}
 
-	function hapusGuru($data){
-		global $koneksi;
-		$id = $data["hapusguru"];
+	function hapusGuruu($data){
+		global $koneksi; 
+		$id = $data["hapusGuru"];
 
-		$destroy = mysqli_query($koneksi, "UPDATE register SET id_role=0 WHERE id_user='$id'");
+		$update = mysqli_query($koneksi, "DELETE FROM register WHERE id_user='$id' ");
 
-		if($destroy){
-			echo "<script>
-			alert('Hapus Guru Berhasil');
-			document.location = '../tampilan/dashboard/dataguru.php'
+		if ($update) {
+			echo "<script>alert('Guru berhasil di hapus');
+			document.location= '../tampilan/dashboard/dataguru.php'
 			</script>";
 		}else{
-			echo "<script>
-			alert('Hapus Guru Gagal');
-			document.location = '../tampilan/dashboard/dataguru.php'	
-			</script>";
+			header("Location: ../tampilan/dashboard/dataguru.php");
 		}
 	}
 
+	
 
  ?>
